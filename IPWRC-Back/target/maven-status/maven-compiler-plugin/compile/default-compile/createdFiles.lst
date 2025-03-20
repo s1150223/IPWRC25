@@ -1,0 +1,5 @@
+org\basvalk\ipwrcback\Repository\ProductModelRepository.class
+org\basvalk\ipwrcback\Controller\ProductController.class
+org\basvalk\ipwrcback\IpwrcBackApplication.class
+org\basvalk\ipwrcback\Model\ProductModel.class
+org\basvalk\ipwrcback\Service\ProductService.class

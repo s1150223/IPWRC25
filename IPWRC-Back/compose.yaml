@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres_container
+    environment:
+      POSTGRES_DB: ipwrc
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+    ports:
+      - "5432:5432" # Map host port 5432 to container port 5432
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql # Mount script
+    networks:
+      - backend-network
+
+networks:
+  backend-network:
