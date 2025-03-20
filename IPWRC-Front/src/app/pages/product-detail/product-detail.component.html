@@ -1,0 +1,49 @@
+<div *ngIf="product" class="product-detail">
+
+  <!-- View Mode -->
+  <div *ngIf="!isEditing">
+    <h2>{{ product.name }}</h2>
+    <p><strong>Price:</strong> €{{ product.price }}</p>
+    <p><strong>Year:</strong> {{ product.year }}</p>
+    <p><strong>Type:</strong> {{ product.type }}</p>
+    <p><strong>Description:</strong> {{ product.description }}</p>
+
+    <!-- Edit Button (admin only) -->
+    <button *ngIf="authService.getRole() === 'ROLE_ADMIN'" (click)="editProduct()">Edit</button>
+    <!-- Show Delete button only for admins -->
+    <button *ngIf="authService.getRole() === 'ROLE_ADMIN'" (click)="deleteProduct()" class="delete-btn">🗑 Delete Product</button>
+
+  </div>
+
+  <!-- Edit Mode -->
+  <form *ngIf="isEditing" (ngSubmit)="saveProduct()">
+    <label>
+      Name:
+      <input type="text" [(ngModel)]="product.name" name="name" required />
+    </label>
+
+    <label>
+      Price:
+      <input type="number" [(ngModel)]="product.price" name="price" step="0.01" required />
+    </label>
+
+    <label>
+      Year:
+      <input type="number" [(ngModel)]="product.year" name="year" required />
+    </label>
+
+    <label>
+      Type:
+      <input type="text" [(ngModel)]="product.type" name="type" />
+    </label>
+
+    <label>
+      Description:
+      <textarea [(ngModel)]="product.description" name="description"></textarea>
+    </label>
+
+    <button type="submit"> Save</button>
+    <button type="button" (click)="cancelEdit()">Cancel</button>
+  </form>
+
+</div>

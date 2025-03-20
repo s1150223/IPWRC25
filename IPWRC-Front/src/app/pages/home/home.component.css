@@ -1,0 +1,16 @@
+.car-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.car-item {
+  border: 1px solid #ddd;
+  padding: 15px;
+  text-align: center;
+}
+
+.car-item img {
+  width: 200px;
+  height: 150px;
+}
