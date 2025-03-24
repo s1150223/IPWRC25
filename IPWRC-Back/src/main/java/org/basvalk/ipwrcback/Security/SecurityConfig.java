@@ -47,11 +47,10 @@ public class SecurityConfig {
         return http.build();
     }
 
-    // 👇 CORS config bean if you're using the Spring-native way
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("http://localhost:4200"));
+        config.setAllowedOrigins(List.of("http://localhost:4200", "https://ipwrc25.onrender.com/"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true);
@@ -67,7 +66,7 @@ public class SecurityConfig {
     public AuthenticationManager authenticationManager(
             AuthenticationConfiguration configuration
     ) throws Exception {
-        return configuration.getAuthenticationManager(); // ✅ Spring handles the encoder internally
+        return configuration.getAuthenticationManager();
     }
 
 
