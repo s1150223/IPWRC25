@@ -6,7 +6,7 @@ import { Observable, tap } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:8080/api/auth';
+  private apiUrl = 'https://ipwrc25back.onrender.com/api/auth';
   private tokenKey = 'authToken';
   private usernameKey = 'username';
   private roleKey = 'userRole';
