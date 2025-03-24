@@ -1,0 +1,16 @@
+org\basvalk\ipwrcback\Util\JwtUtil.class
+org\basvalk\ipwrcback\Service\ProductService.class
+org\basvalk\ipwrcback\Repository\UserRepository.class
+org\basvalk\ipwrcback\Controller\AuthController.class
+org\basvalk\ipwrcback\Model\ProductModel.class
+org\basvalk\ipwrcback\Controller\UserController.class
+org\basvalk\ipwrcback\Security\JwtFilter.class
+org\basvalk\ipwrcback\Model\UserModel.class
+org\basvalk\ipwrcback\Security\UserDetailsServiceImpl.class
+org\basvalk\ipwrcback\Repository\ProductModelRepository.class
+org\basvalk\ipwrcback\Config\CorsConfig$1.class
+org\basvalk\ipwrcback\Controller\ProductController.class
+org\basvalk\ipwrcback\IpwrcBackApplication.class
+org\basvalk\ipwrcback\Service\UserService.class
+org\basvalk\ipwrcback\Config\CorsConfig.class
+org\basvalk\ipwrcback\Security\SecurityConfig.class
