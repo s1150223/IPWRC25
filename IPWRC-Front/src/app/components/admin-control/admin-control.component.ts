@@ -85,14 +85,32 @@ export class AdminControlComponent {
     }
 
     createProduct() {
-        this.productService.createProduct(this.newProduct).subscribe({
+        // 🛠️ Only send category ID if it exists
+        const payload = {
+            ...this.newProduct,
+            category: this.newProduct.category
+                ? { id: this.newProduct.category.id }
+                : null
+        };
+
+        this.productService.createProduct(payload).subscribe({
             next: () => {
-                alert('Product Added');
-                this.newProduct = { name: '', description: '', year: 2024, type: '', price: 0, img: '' };
+                alert('✅ Product Added');
+                this.loadProducts(); // Refresh list after adding
+                this.newProduct = {
+                    name: '',
+                    description: '',
+                    year: 2024,
+                    type: '',
+                    price: 0,
+                    img: '',
+                    category: undefined
+                };
             },
-            error: () => alert('Failed to add product')
-        })
+            error: () => alert('❌ Failed to add product')
+        });
     }
+
 
     private loadCategories() {
         this.productService.getCategories().subscribe({

@@ -83,4 +83,8 @@ public class ProductModel {
     public CategoryModel getCategory() {
         return category;
     }
+
+    public void setCategory(CategoryModel category) {
+        this.category = category;
+    }
 }
