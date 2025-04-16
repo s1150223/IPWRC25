@@ -42,9 +42,14 @@
   <label>Name: <input [(ngModel)]="newProduct.name" name="name" /></label>
   <label>Description: <input [(ngModel)]="newProduct.description" name="description" /></label>
   <label>Year: <input type="number" [(ngModel)]="newProduct.year" name="year" /></label>
-  <label>Type: <input [(ngModel)]="newProduct.type" name="type" /></label>
   <label>Price: <input type="number" [(ngModel)]="newProduct.price" name="price" step="0.01" /></label>
-  <label>Image: <input [(ngModel)]="newProduct.img" name="image" /></label>
+  <label>Category:
+    <select [(ngModel)]="newProduct.category" name="category">
+      <option [ngValue]="undefined">-- None --</option>
+      <option *ngFor="let cat of categories" [ngValue]="cat">{{ cat.name }}</option>
+    </select>
+  </label>
+
   <button type="submit">Add Product</button>
 </form>
 
@@ -56,7 +61,7 @@
   <tr>
     <th>ID</th>
     <th>Name</th>
-    <th>Type</th>
+    <th>Category</th>
     <th>Year</th>
     <th>Price</th>
   </tr>
@@ -65,10 +70,34 @@
   <tr *ngFor="let product of products">
     <td>{{ product.id }}</td>
     <td>{{ product.name }}</td>
-    <td>{{ product.type }}</td>
+    <td>
+      <select [ngModel]="product.category"
+              (ngModelChange)="onCategoryChange(product, $event)">
+        <option [ngValue]="undefined">-- None --</option>
+        <option *ngFor="let cat of categories" [ngValue]="cat">{{ cat.name }}</option>
+      </select>
+    </td>
+
     <td>{{ product.year }}</td>
     <td>€{{ product.price | number:'1.0-2' }}</td>
   </tr>
   </tbody>
 </table>
+
+<hr />
+<h3>📁 Manage Categories</h3>
+
+<form (ngSubmit)="addCategory()">
+  <label>Category name:
+    <input [(ngModel)]="newCategory.name" name="categoryName" />
+  </label>
+  <button type="submit">➕ Add Category</button>
+</form>
+
+<ul>
+  <li *ngFor="let cat of categories">
+    {{ cat.name }}
+    <button (click)="deleteCategory(cat.id!)">🗑️ Delete</button>
+  </li>
+</ul>
 

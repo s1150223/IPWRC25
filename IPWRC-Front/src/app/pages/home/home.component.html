@@ -1,8 +1,25 @@
-<div class="car-list">
-  <div *ngFor="let product of products" class="car-item">
-    <img [src]="product.img" alt="{{ product.name }}">
-    <h3>{{ product.name }}</h3>
-    <p>Price: ${{ product.price }}</p>
-    <a [routerLink]="'/product/' + product.id">View Details</a>
-  </div>
+<h2>🏠 Welcome</h2>
+
+<!-- Category filter -->
+<label>Filter by Category:</label>
+<select [(ngModel)]="selectedCategoryId" (change)="filterByCategory()">
+  <option [ngValue]="null">All</option>
+  <option *ngFor="let cat of categories" [ngValue]="cat.id">
+    {{ cat.name }}
+  </option>
+</select>
+
+<hr />
+
+<!-- Display filtered products -->
+<div *ngFor="let product of filteredProducts" class="product-box">
+  <h4>{{ product.name }}</h4>
+  <p>{{ product.description }}</p>
+  <p><strong>Price:</strong> €{{ product.price | number:'1.2-2' }}</p>
+  <small><strong>Category:</strong> {{ product.category?.name || 'None' }}</small>
+  <br />
+  <!-- Optional cart button -->
+  <a [routerLink]="'/product/' + product.id">View Details</a>
+  <button (click)="addToCart(product)">🛒 Add to Cart</button>
+  <hr />
 </div>

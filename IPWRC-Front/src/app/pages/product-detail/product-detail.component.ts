@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { Product, ProductService } from '../../services/product.service';
+import { ProductService } from '../../services/product.service';
 import { NgIf } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CartService } from "../../services/cart.service";
+import { Product } from "../../models/product.model";
 
 @Component({
   standalone: true,
@@ -21,7 +23,8 @@ export class ProductDetailComponent {
   constructor(private route: ActivatedRoute,
               private productService: ProductService,
               public authService: AuthService,
-              public router: Router
+              public router: Router,
+              private cartService: CartService
   ) {
   }
 
@@ -30,6 +33,10 @@ export class ProductDetailComponent {
     this.productService.getProductById(id).subscribe((data) => {
       this.product = data;
     });
+  }
+
+  addToCart() {
+    this.cartService.addToCart(this.product, 1);
   }
 
   editProduct() {
@@ -56,7 +63,7 @@ export class ProductDetailComponent {
   }
 
   saveProduct() {
-    this.productService.updateProduct(this.product.id, this.product).subscribe(updated => {
+    this.productService.updateProduct(this.product).subscribe(updated => {
       this.product = updated;
       this.originalProduct = { ...updated };
       this.isEditing = false;

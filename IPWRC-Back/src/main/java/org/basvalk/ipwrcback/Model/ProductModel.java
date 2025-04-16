@@ -12,6 +12,11 @@ public class ProductModel {
     private String name;
     private String description;
     private int year;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id", nullable = true)
+    private CategoryModel category;
+
     private String type;
     private double price;
     private String image;

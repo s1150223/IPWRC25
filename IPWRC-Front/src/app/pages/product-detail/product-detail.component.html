@@ -12,6 +12,7 @@
     <button *ngIf="authService.getRole() === 'ROLE_ADMIN'" (click)="editProduct()">Edit</button>
     <!-- Show Delete button only for admins -->
     <button *ngIf="authService.getRole() === 'ROLE_ADMIN'" (click)="deleteProduct()" class="delete-btn">🗑 Delete Product</button>
+    <button *ngIf="authService.getRole() === 'ROLE_USER'" (click)="addToCart()">🛒 Add to Cart</button>
 
   </div>
 
@@ -24,7 +25,11 @@
 
     <label>
       Price:
-      <input type="number" [(ngModel)]="product.price" name="price" step="0.01" required />
+      <input type="number"
+             [(ngModel)]="product.price"
+             name="price"
+             pattern="^(?!0\d)\d+(\.\d{1,2})?$"
+             step="0.01" required />
     </label>
 
     <label>

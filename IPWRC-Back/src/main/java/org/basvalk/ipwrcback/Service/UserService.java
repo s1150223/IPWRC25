@@ -17,4 +17,5 @@ public class UserService {
     public UserModel findByUsername(String username) {
         return userRepository.findByUsername(username).orElse(null);
     }
+
 }
