@@ -1,0 +1,47 @@
+<h2>🛒 Your Cart</h2>
+
+<div *ngIf="cartItems.length === 0">Cart is empty.</div>
+
+<table *ngIf="cartItems.length > 0" border="1" cellpadding="8">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Price (each)</th>
+        <th>Qty</th>
+        <th>Subtotal</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of cartItems">
+        <td>{{ item.product.name }}</td>
+        <td>€{{ item.product.price | number:'1.2-2' }}</td>
+        <td>
+            <input
+                    type="number"
+                    [value]="item.quantity"
+                    min="1"
+                    (change)="updateQuantity(item, $event)"
+                    [ngClass]="{ 'invalid-input': item.invalidQuantity }"
+            />
+
+            <div *ngIf="item.invalidQuantity" class="error-text">
+                ❌ Invalid quantity
+            </div>
+        </td>
+
+        <td>€{{ item.product.price * item.quantity | number:'1.2-2' }}</td>
+        <td>
+            <button *ngIf="item.product.id !== undefined" (click)="removeItem(item.product.id!)">Remove</button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<button (click)="placeOrder()" [disabled]="hasInvalidQuantities()">🧾 Place Order</button>
+
+
+
+<div *ngIf="cartItems.length > 0">
+    <h3>Total: €{{ getTotal() | number:'1.2-2' }}</h3>
+    <button (click)="clearCart()">🧹 Clear Cart</button>
+</div>

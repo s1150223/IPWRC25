@@ -7,7 +7,8 @@ import { Order, OrderItem } from '../models/order.model';
     providedIn: 'root'
 })
 export class OrderService {
-    private apiUrl = 'http://localhost:8080/api/orders';
+    // private apiUrl = 'http://localhost:8080/api/orders';
+    private apiUrl = 'https://ipwrc25back.onrender.com/api/orders';
 
     constructor(private http: HttpClient) {}
 
