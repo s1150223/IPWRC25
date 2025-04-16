@@ -20,7 +20,7 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/api/**")
-                        .allowedOrigins("https://ipwrc25.onredner.com", "http://localhost:4200")
+                        .allowedOrigins("https://ipwrc25.onredner.com", "https://ipwrc25.onrender.com", "http://localhost:4200")
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
                         .allowCredentials(true);

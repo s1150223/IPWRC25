@@ -1,6 +1,7 @@
 package org.basvalk.ipwrcback.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class CategoryModel {
 
     // Optional: Een categorie kan meerdere producten hebben
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
-    @JsonIgnore
+    @JsonIgnoreProperties("category")
     private List<ProductModel> products;
 
     public Long getId() {

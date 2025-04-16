@@ -1,6 +1,7 @@
 package org.basvalk.ipwrcback.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity
@@ -16,7 +17,7 @@ public class ProductModel {
 
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = true)
-    @JsonIgnore
+    @JsonIgnoreProperties("products")
     private CategoryModel category;
 
     private String type;

@@ -38,8 +38,8 @@ public class OrderService {
             return item;
         }).collect(Collectors.toList());
 
-        order.setItems(orderItems); // ✅ This now syncs both sides
-        orderRepo.save(order);      // ✅ Items will be persisted too!
+        order.setItems(orderItems); //
+        orderRepo.save(order);      //
 
         System.out.println("✅ Order saved for user: " + username);
     }
