@@ -54,7 +54,7 @@ export class ProductDetailComponent {
       this.productService.deleteProduct(this.product.id).subscribe({
         next: () => {
           console.log('🗑️ Product deleted');
-          this.router.navigate(['/']); // ✅ Redirect to homepage
+          this.router.navigate(['/']);
         },
         error: (err) => {
         }

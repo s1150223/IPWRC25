@@ -23,9 +23,6 @@ export class HomeComponent {
   constructor(private productService: ProductService,
               private cartService: CartService,
               private router: Router) {
-    // this.ProductService.getAllProducts().subscribe((data) => {
-    // this.products = data;
-    // });
   }
 
   ngOnInit(): void {
