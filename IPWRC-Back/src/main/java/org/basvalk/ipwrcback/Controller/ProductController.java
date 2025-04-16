@@ -1,6 +1,7 @@
 package org.basvalk.ipwrcback.Controller;
 
 import org.basvalk.ipwrcback.Model.ProductModel;
+import org.basvalk.ipwrcback.Repository.ProductModelRepository;
 import org.basvalk.ipwrcback.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,9 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private ProductModelRepository productRepo;
 
     @GetMapping
     public List<ProductModel> getAllProducts() {
@@ -38,9 +42,11 @@ public class ProductController {
 
 
     @PostMapping
-    public ProductModel createProduct(@RequestBody ProductModel product) {
-        return productService.saveProduct(product);
+    public ResponseEntity<ProductModel> createProduct(@RequestBody ProductModel product) {
+        System.out.println("🛠️ Received product: " + product.getName() + " Category ID: " + (product.getCategory() != null ? product.getCategory().getId() : "null"));
+        return ResponseEntity.ok(productRepo.save(product));
     }
+
 
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")

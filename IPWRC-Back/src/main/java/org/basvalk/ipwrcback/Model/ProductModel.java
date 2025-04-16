@@ -1,5 +1,6 @@
 package org.basvalk.ipwrcback.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -15,6 +16,7 @@ public class ProductModel {
 
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = true)
+    @JsonIgnore
     private CategoryModel category;
 
     private String type;
@@ -76,5 +78,9 @@ public class ProductModel {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public CategoryModel getCategory() {
+        return category;
     }
 }
