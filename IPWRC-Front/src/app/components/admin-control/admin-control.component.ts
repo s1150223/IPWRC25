@@ -85,7 +85,6 @@ export class AdminControlComponent {
     }
 
     createProduct() {
-        // 🛠️ Only send category ID if it exists
         const payload = {
             ...this.newProduct,
             category: this.newProduct.category
@@ -96,7 +95,7 @@ export class AdminControlComponent {
         this.productService.createProduct(payload).subscribe({
             next: () => {
                 alert('✅ Product Added');
-                this.loadProducts(); // Refresh list after adding
+                this.loadProducts();
                 this.newProduct = {
                     name: '',
                     description: '',

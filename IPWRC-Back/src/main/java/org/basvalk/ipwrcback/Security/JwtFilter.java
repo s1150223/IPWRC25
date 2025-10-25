@@ -10,11 +10,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
+import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
 @Component
-public class JwtFilter extends GenericFilter {
+public class JwtFilter extends OncePerRequestFilter {
 
     @Autowired
     private JwtUtil jwtUtil;
@@ -23,26 +24,25 @@ public class JwtFilter extends GenericFilter {
     private UserDetailsServiceImpl userDetailsService;
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+    public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws IOException, ServletException {
 
-        String path = ((HttpServletRequest) request).getRequestURI();
-        if (path.startsWith("/api/auth")) {
+        String path = request.getRequestURI();
+        if (path.startsWith("/api/auth") || path.startsWith("/api/products") || path.startsWith("/api/categories")) {
             chain.doFilter(request, response);
             return;
         }
 
+        final String authHeader = request.getHeader("Authorization");
 
-        final HttpServletRequest httpRequest = (HttpServletRequest) request;
-        final String authHeader = httpRequest.getHeader("Authorization");
+       if(authHeader == null || !authHeader.startsWith("Bearer ")) {
+           chain.doFilter(request, response);
+           return;
+       }
 
-        String username = null;
-        String jwt = null;
+        String jwt = authHeader.substring(7);
+        String username = jwtUtil.extractUsername(jwt);
 
-        if (authHeader != null && authHeader.startsWith("Bearer ")) {
-            jwt = authHeader.substring(7);
-            username = jwtUtil.extractUsername(jwt);
-        }
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
@@ -52,7 +52,7 @@ public class JwtFilter extends GenericFilter {
                         new UsernamePasswordAuthenticationToken(
                                 userDetails, null, userDetails.getAuthorities()
                         );
-                token.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpRequest));
+                token.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(token);
             }
         }
