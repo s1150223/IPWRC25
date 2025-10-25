@@ -53,7 +53,11 @@ export class ProductService {
     return this.http.get<Product[]>(`${this.apiUrlCategory}/${categoryId}/products`);
   }
 
-
+  assignCategory(productId: number, categoryId: number) {
+    return this.http.put<Product>(`${this.apiUrlCategory}/${categoryId}/products/${productId}`,
+      {}
+    );
+  }
 
   addCategory(newCategory: Category) {
     return this.http.post<Category>(`${this.apiUrlCategory}`, newCategory);

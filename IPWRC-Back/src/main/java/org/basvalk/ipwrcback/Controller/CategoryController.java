@@ -36,4 +36,25 @@ public class CategoryController {
         return ResponseEntity.ok(saved);
     }
 
+    @PutMapping("/{categoryId}/products/{productId}") // Koppelt bestaand product aan bestaande categorie
+    public ResponseEntity<ProductModel> assignProductToCategory(
+            @PathVariable Long categoryId,
+            @PathVariable Long productId) {
+
+        return productRepo.findById(productId)
+                .map(product -> {
+                    // haal de category op
+                    CategoryModel category = categoryRepo.findById(categoryId)
+                            .orElseThrow(() -> new RuntimeException("Category not found"));
+
+                    // koppel de categorie
+                    product.setCategory(category);
+                    ProductModel updated = productRepo.save(product);
+
+                    return ResponseEntity.ok(updated);
+                })
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+
 }

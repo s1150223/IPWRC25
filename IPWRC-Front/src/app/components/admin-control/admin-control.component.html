@@ -72,6 +72,7 @@
     <td>{{ product.name }}</td>
     <td>
       <select [ngModel]="product.category"
+              [compareWith]="compareCategories"
               (ngModelChange)="onCategoryChange(product, $event)">
         <option [ngValue]="undefined">-- None --</option>
         <option *ngFor="let cat of categories" [ngValue]="cat">{{ cat.name }}</option>

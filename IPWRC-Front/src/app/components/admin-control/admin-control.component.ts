@@ -148,16 +148,24 @@ export class AdminControlComponent {
         }
     }
 
-    onCategoryChange(product: Product, newCategory: Category | undefined) {
-        product.category = newCategory;
-        this.productService.updateProduct(product).subscribe({
-            next: updated => {
-                console.log(`✅ Updated product ${updated.name} with new category: ${updated.category?.name}`);
-            },
-            error: () => {
-                alert('❌ Failed to update category');
-            }
-        });
+    compareCategories(cat1: any, cat2: any): boolean {
+        return cat1 && cat2 ? cat1.id === cat2.id : cat1 === cat2;
     }
+
+    onCategoryChange(product: Product, newCategory: Category | undefined) {
+    if (!newCategory?.id || !product.id) return;
+
+    this.productService.assignCategory(product.id, newCategory.id).subscribe({
+        next: updated => {
+        product.category = newCategory;
+        console.log(`✅ Product ${updated.name} gekoppeld aan categorie: ${newCategory.name}`);
+        },
+        error: err => {
+        console.error('❌ Fout bij koppelen categorie:', err);
+        alert('Fout bij koppelen categorie');
+        }
+    });
+    }
+
 
 }
