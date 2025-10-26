@@ -81,6 +81,15 @@
 
     <td>{{ product.year }}</td>
     <td>€{{ product.price | number:'1.0-2' }}</td>
+
+    <input
+      type="number"
+      [(ngModel)]="product.stock"
+      (change)="onStockChange(product)"
+      min="0"
+    />
+
+
   </tr>
   </tbody>
 </table>

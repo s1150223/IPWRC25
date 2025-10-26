@@ -35,6 +35,7 @@ export class AdminControlComponent {
         price: 0,
         img: '',
         category: undefined,
+        stock: 0,
     };
 
     constructor(private http: HttpClient,
@@ -103,7 +104,8 @@ export class AdminControlComponent {
                     type: '',
                     price: 0,
                     img: '',
-                    category: undefined
+                    category: undefined,
+                    stock: 0,
                 };
             },
             error: () => alert('❌ Failed to add product')
@@ -166,5 +168,18 @@ export class AdminControlComponent {
     });
     }
 
-
+    onStockChange(product: Product) {
+    if (product.stock < 0) {
+        alert('Stock cannot be negative');
+        return;
+    }
+    this.productService.updateProduct(product).subscribe({
+        next: () => {
+        alert(`✅ Stock for "${product.name}" updated to ${product.stock}`);
+        },
+        error: () => {
+        alert('❌ Failed to update stock');
+        }
+    });
+    }
 }

@@ -24,6 +24,9 @@ public class ProductModel {
     private double price;
     private String image;
 
+    @Column(nullable = false)
+    private int stock = 0;
+
     // Getters and Setters
     public Long getId() {
         return id;
@@ -87,5 +90,13 @@ public class ProductModel {
 
     public void setCategory(CategoryModel category) {
         this.category = category;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
     }
 }
