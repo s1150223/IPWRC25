@@ -1,58 +1,15 @@
-# =========================
-# 🌱 Global
-# =========================
+# --- Back-end ---
+/IPWRC-Back/target/
+/IPWRC-Back/.idea/
+/IPWRC-Back/.vscode/
+*.iml
+
+# --- Front-end ---
+/IPWRC-Front/node_modules/
+/IPWRC-Front/dist/
+/IPWRC-Front/.angular/cache/
+
+# --- OS / tooling ---
 .DS_Store
 Thumbs.db
-*.log
-*.tmp
-*.swp
-*.bak
-*.class
-*.iml
-.idea/
-.vscode/
 .env
-.env.local
-dist/
-build/
-coverage/
-
-# =========================
-# 🧠 Backend (Spring Boot / Maven)
-# =========================
-# Maven target directories
-IPWRC-Back/target/
-IPWRC-Back/.classpath
-IPWRC-Back/.project
-IPWRC-Back/.settings/
-
-IPWRC-Back/src/main/resources/application-local.properties
-IPWRC-Back/src/main/resources/application-dev.properties
-IPWRC-Back/src/main/resources/application-test.properties
-
-
-IPWRC-Front/dist/
-IPWRC-Front/.angular/
-
-# Local environment configs
-IPWRC-Front/src/environments/environment*.ts
-
-# =========================
-# 💾 System / OS
-# =========================
-# macOS
-*.DS_Store
-.AppleDouble
-.LSOverride
-
-
-.idea/
-*.iml
-out/
-
-.vscode/
-.history/
-
-*.pid
-docker-compose.override.yml
-*.local.yml
