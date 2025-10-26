@@ -29,8 +29,12 @@ public class OrderController {
             @AuthenticationPrincipal UserDetails userDetails,
             @RequestBody List<OrderItemDTO> items
     ) {
-        orderService.placeOrder(userDetails.getUsername(), items);
-        return ResponseEntity.ok(Collections.singletonMap("message", "Order placed successfully"));
+        try {
+            orderService.placeOrder(userDetails.getUsername(), items);
+            return ResponseEntity.ok(Collections.singletonMap("message", "Order placed successfully"));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(Collections.singletonMap("error", e.getMessage()));
+        }
 
     }
 

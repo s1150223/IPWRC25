@@ -27,6 +27,7 @@ export class CartComponent {
 
   placeOrder() {
     const items: OrderItem[] = this.cartItems.map(item => ({
+      productId: item.product.id,
       productName: item.product.name,
       quantity: item.quantity,
       price: item.product.price
@@ -39,6 +40,9 @@ export class CartComponent {
         alert('✅ Order placed!');
         this.router.navigate(['/my-orders']);
       },
+      error: (err) => {
+        console.error('❌ Error placing order:', err);
+      }
     });
 
   }
