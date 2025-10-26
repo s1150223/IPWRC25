@@ -32,8 +32,14 @@ public class OrderController {
         try {
             orderService.placeOrder(userDetails.getUsername(), items);
             return ResponseEntity.ok(Collections.singletonMap("message", "Order placed successfully"));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity
+                .badRequest()
+                .body(Collections.singletonMap("error", e.getMessage()));
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(Collections.singletonMap("error", e.getMessage()));
+            return ResponseEntity
+                .status(500)
+                .body(Collections.singletonMap("error", "An unexpected error occurred"));
         }
 
     }

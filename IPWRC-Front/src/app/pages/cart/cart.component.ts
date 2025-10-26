@@ -42,6 +42,12 @@ export class CartComponent {
       },
       error: (err) => {
         console.error('❌ Error placing order:', err);
+
+        const backendMessage =
+            err.error?.error || 
+            err.error?.message || 
+            'Unknown error';
+        alert(backendMessage);
       }
     });
 
