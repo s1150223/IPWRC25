@@ -59,6 +59,8 @@ public class SecurityConfig {
         config.setAllowedOrigins(List.of(
             "https://ipwrc25-hdfc.onrender.com",
             "https://ipwrc25back2.onrender.com",
+            "https://ipwrc25-hdfc.onrender.com/",
+            "https://ipwrc25back2.onrender.com/",
             "http://localhost:4200"
         ));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
@@ -72,15 +74,32 @@ public class SecurityConfig {
         return source;
     }
 
+
+
     @Bean
     public FilterRegistrationBean<CorsFilter> corsFilterRegistration() {
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowedOrigins(List.of(
+            "https://ipwrc25-hdfc.onrender.com",
+            "https://ipwrc25back2.onrender.com",
+            "https://ipwrc25-hdfc.onrender.com/",
+            "https://ipwrc25back2.onrender.com/",
+            "http://localhost:4200"
+        ));
+        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        config.setAllowedHeaders(List.of("*"));
+        config.setExposedHeaders(List.of("*"));
+        config.setAllowCredentials(true);
+        config.setMaxAge(3600L);
+
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", corsConfigurationSource().getCorsConfiguration(null));
+        source.registerCorsConfiguration("/**", config);
 
         FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>(new CorsFilter(source));
-        bean.setOrder(Ordered.HIGHEST_PRECEDENCE); // Zorg dat dit de eerste filter is
+        bean.setOrder(Ordered.HIGHEST_PRECEDENCE); // draait vóór Spring Security
         return bean;
-    }
+        }
+
 
     @PostConstruct
     public void logCorsOrigins() {
