@@ -20,7 +20,7 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/api/**")
-                        .allowedOrigins("https://ipwrc25.onrender.com", "http://localhost:4200")
+                        .allowedOrigins("https://ipwrc25.onrender.com", "http://localhost:4200", "https://ipwrc25back-dswp.onrender.com", "https://ipwrc25back-dswp.onrender.com/")
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
                         .allowCredentials(true);
@@ -33,7 +33,7 @@ public class CorsConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.setAllowedOrigins(List.of("https://ipwrc25.onrender.com/", "http://localhost:4200"));
+        config.setAllowedOrigins(List.of("https://ipwrc25.onrender.com/", "http://localhost:4200", "https://ipwrc25back-dswp.onrender.com", "https://ipwrc25back-dswp.onrender.com/"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
 
