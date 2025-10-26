@@ -17,6 +17,8 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import jakarta.annotation.PostConstruct;
+
 import java.util.List;
 
 import static org.springframework.security.config.Customizer.withDefaults;
@@ -65,6 +67,13 @@ public class SecurityConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
         return source;
+    }
+
+    @PostConstruct
+    public void logCorsOrigins() {
+        System.out.println("CORS Origins: " + String.join(", ", corsConfigurationSource()
+        .getCorsConfiguration(null)
+        .getAllowedOrigins()));
     }
 
 
