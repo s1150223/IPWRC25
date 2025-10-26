@@ -7,7 +7,7 @@ import { Order, OrderItem } from '../models/order.model';
     providedIn: 'root'
 })
 export class OrderService {
-    private apiUrl = 'https://ipwrc25back-dswp.onrender.com/api/orders';
+    private apiUrl = 'https://ipwrc25back2.onrender.com/api/orders';
 
     constructor(private http: HttpClient) {}
 
