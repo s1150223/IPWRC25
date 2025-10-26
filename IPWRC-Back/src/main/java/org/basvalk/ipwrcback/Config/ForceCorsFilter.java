@@ -6,7 +6,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-
 import java.io.IOException;
 
 @Component
@@ -20,12 +19,11 @@ public class ForceCorsFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) res;
         HttpServletRequest request = (HttpServletRequest) req;
 
-        response.setHeader("Access-Control-Allow-Origin", "https://ipwrc25-hdfc.onrender.com");
+        response.setHeader("Access-Control-Allow-Origin", "*");
         response.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
-        response.setHeader("Access-Control-Allow-Headers", "Authorization,Content-Type");
-        response.setHeader("Access-Control-Allow-Credentials", "true");
+        response.setHeader("Access-Control-Allow-Headers", "Authorization,Content-Type,Accept,Origin");
+        response.setHeader("Access-Control-Max-Age", "3600");
 
-        // Laat preflight requests direct een OK teruggeven
         if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
             response.setStatus(HttpServletResponse.SC_OK);
             return;
