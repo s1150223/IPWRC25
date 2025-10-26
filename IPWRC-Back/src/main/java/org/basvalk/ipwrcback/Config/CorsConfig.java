@@ -10,7 +10,7 @@ import org.springframework.web.servlet.config.annotation.*;
 
 import java.util.List;
 
-@Configuration
+// @Configuration
 public class CorsConfig {
 
     @Bean
@@ -20,7 +20,7 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/api/**")
-                        .allowedOrigins("https://ipwrc25.onrender.com", "http://localhost:4200", "https://ipwrc25-hdfc.onrender.com/", "https://ipwrc25-hdfc.onrender.com")
+                        .allowedOrigins("https://ipwrc25.onrender.com", "http://localhost:4200", "https://ipwrc25-hdfc.onrender.com/", "https://ipwrc25-hdfc.onrender.com/")
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
                         .allowCredentials(true);
