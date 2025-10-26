@@ -9,9 +9,7 @@ import { Category } from "../models/category.model";
 })
 export class ProductService {
   private apiUrlProducts = 'https://ipwrc25back-dswp.onrender.com/api/products'; //
-  // private apiUrlProducts = 'http://localhost:8080/api/products'; //
   private apiUrlCategory = 'https://ipwrc25back-dswp.onrender.com/api/categories'; //
-  // private apiUrlCategory = 'http://localhost:8080/api/categories'; //
 
   constructor(private http: HttpClient) {}
 
