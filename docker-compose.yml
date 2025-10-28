@@ -1,0 +1,24 @@
+services:
+  backend:
+    build:
+      context: ./IPWRC-Back
+    container_name: ipwrc-back
+    ports:
+      - "8080:8080"
+    networks:
+      - app-network
+
+  frontend:
+    build:
+      context: ./IPWRC-Front
+    container_name: ipwrc-front
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
