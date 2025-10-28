@@ -13,7 +13,7 @@ export interface User {
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = 'https://ipwrc25back2.onrender.com/api/users';
+  private apiUrl = '/api/users';
 
   constructor(private http: HttpClient) {
   }
