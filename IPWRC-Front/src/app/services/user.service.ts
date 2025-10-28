@@ -13,7 +13,7 @@ export interface User {
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = '/api/users';
+  private apiUrl = 'https://backend-production-f258.up.railway.app/api/users';
 
   constructor(private http: HttpClient) {
   }

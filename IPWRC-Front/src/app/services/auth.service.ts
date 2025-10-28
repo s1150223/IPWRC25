@@ -6,7 +6,7 @@ import { Observable, tap } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = '/api/auth';
+  private apiUrl = 'https://backend-production-f258.up.railway.app/api/auth';
   private tokenKey = 'authToken';
   private usernameKey = 'username';
   private roleKey = 'userRole';

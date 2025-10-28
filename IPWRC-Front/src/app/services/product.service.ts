@@ -8,8 +8,8 @@ import { Category } from "../models/category.model";
   providedIn: 'root',
 })
 export class ProductService {
-  private apiUrlProducts = '/api/products'; //
-  private apiUrlCategory = '/api/categories'; //
+  private apiUrlProducts = 'https://backend-production-f258.up.railway.app/api/products'; //
+  private apiUrlCategory = 'https://backend-production-f258.up.railway.app/api/categories'; //
 
   constructor(private http: HttpClient) {}
 
