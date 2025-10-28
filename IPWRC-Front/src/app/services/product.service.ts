@@ -8,10 +8,8 @@ import { Category } from "../models/category.model";
   providedIn: 'root',
 })
 export class ProductService {
-  // private apiUrlProducts = 'https://ipwrc25back-dswp.onrender.com/api/products'; //
-  private apiUrlProducts = 'http://localhost:8080/api/products'; //
-  // private apiUrlCategory = 'https://ipwrc25back-dswp.onrender.com/api/categories'; //
-  private apiUrlCategory = 'http://localhost:8080/api/categories'; //
+  private apiUrlProducts = 'https://ipwrc25back2.onrender.com/api/products'; //
+  private apiUrlCategory = 'https://ipwrc25back2.onrender.com/api/categories'; //
 
   constructor(private http: HttpClient) {}
 
