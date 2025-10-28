@@ -1,21 +1,21 @@
 services:
-  backend:
+  ipwrc-back:
     build:
       context: ./IPWRC-Back
-    container_name: ipwrc-back
+    container_name: backend
     ports:
       - "8080:8080"
     networks:
       - app-network
 
-  frontend:
+  ipwrc-front:
     build:
       context: ./IPWRC-Front
-    container_name: ipwrc-front
+    container_name: frontend
     ports:
       - "80:80"
     depends_on:
-      - backend
+      - ipwrc-back
     networks:
       - app-network
 

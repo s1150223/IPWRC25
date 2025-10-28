@@ -24,6 +24,7 @@ public class ProductController {
 
     @GetMapping
     public List<ProductModel> getAllProducts() {
+        System.out.println("Controller hit: /api/products");
         return productService.getAllProducts();
     }
 

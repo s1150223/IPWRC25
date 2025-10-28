@@ -28,20 +28,26 @@ public class JwtFilter extends OncePerRequestFilter {
             throws IOException, ServletException {
 
         String path = request.getRequestURI();
-        if (path.startsWith("/api/auth") || path.startsWith("/api/categories")) {
+        System.out.println("JWT Filter - Incoming request: " + path);
+
+
+        if (path.startsWith("/api/auth") || path.startsWith("/api/categories") || path.startsWith("/api/products")) {
             chain.doFilter(request, response);
             return;
         }
         
         final String authHeader = request.getHeader("Authorization");
+        System.out.println("JWT Filter - Authorization header: " + authHeader);
 
        if(authHeader == null || !authHeader.startsWith("Bearer ")) {
+            System.out.println("JWT Filter - No bearer token, continuing filter chain");
            chain.doFilter(request, response);
            return;
        }
 
         String jwt = authHeader.substring(7);
         String username = jwtUtil.extractUsername(jwt);
+        System.out.println("JWT Filter - Extracted username: " + username);
 
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
@@ -53,7 +59,10 @@ public class JwtFilter extends OncePerRequestFilter {
                                 userDetails, null, userDetails.getAuthorities()
                         );
                 token.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                System.out.println("JWT Filter - Token validated for: " + username);
                 SecurityContextHolder.getContext().setAuthentication(token);
+            } else {
+                System.out.println("JWT Filter - Invalid token for: " + username);
             }
         }
 
